@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:WhatsAppMAUI.Models"
+             x:Class="WhatsAppMAUI.Pages.ChatsPage"
+             xmlns:viewModel="clr-namespace:WhatsAppMAUI.ViewModels"
+             Title="Serene">
+    <ContentPage.BindingContext>
+        <viewModel:ChatsViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" Order="Primary"/>
+        
+        <ToolbarItem Text="New group" Order="Secondary"/>
+        <ToolbarItem Text="New broadcast" Order="Secondary"/>
+        <ToolbarItem Text="Linked Devices" Order="Secondary"/>
+        <ToolbarItem Text="Starred Messages" Order="Secondary"/>
+        <ToolbarItem Text="Payments" Order="Secondary"/>
+        <ToolbarItem Text="Settings" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
+    
+    
+    <Grid RowDefinitions="*, Auto">
+        <CollectionView Grid.Row="0"
+                        ItemsSource="{Binding Contacts}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Contact">
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout
+                HorizontalOptions="Center"
+                Orientation="Vertical"
+                VerticalOptions="Center">
+                            <Image
+                    HeightRequest="55"
+                    HorizontalOptions="StartAndExpand"
+                    Source="{Binding ProfileImage}"
+                    VerticalOptions="Center"
+                    WidthRequest="55">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                        <StackLayout
+                Margin="10,0,0,0"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Vertical"
+                VerticalOptions="Center">
+                            <StackLayout
+                    Margin="0,0,10,0"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal"
+                    VerticalOptions="Center">
+                                <Label
+                        Margin="0,0,0,0"
+                        FontSize="17"
+                        HorizontalOptions="Start"
+                        Text="{Binding Name}"
+                        TextColor="#000000"
+                         />
+                                <Label
+                        FontSize="12"
+                        HorizontalOptions="EndAndExpand"
+                        Text="{Binding ChatMetaData.LastChatDatetime}"
+                        TextColor="Gray"
+                       />
+                            </StackLayout>
+                            <StackLayout
+                    Margin="0,0,10,10"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal"
+                    VerticalOptions="Center">
+                                <Image
+                        HeightRequest="15"
+                        HorizontalOptions="Start"
+                        IsVisible="{Binding ChatMetaData.MessageIsFromMe}"
+                        Source="tick.png" />
+                                <Label
+                        FontSize="15"
+                        HorizontalOptions="Start"
+                        Text="{Binding ChatMetaData.MessageContent}"
+                        TextColor="Gray"
+                       />
+                                <Image
+                        HeightRequest="20"
+                        HorizontalOptions="EndAndExpand"
+                        IsVisible="{Binding ChatPinned}"
+                        Source="pins.png"
+                        WidthRequest="20" />
+                            </StackLayout>
+                            <StackLayout
+                    Margin="0,0,10,0"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal"
+                    VerticalOptions="Center">
+                                <BoxView
+                        HeightRequest="0.3"
+                        HorizontalOptions="FillAndExpand"
+                        Color="LightGray" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <Button Grid.Row="0" 
+                Text="+" 
+                FontSize="30"
+                FontAttributes="Bold"
+                Padding="0"
+                HeightRequest="50" 
+                WidthRequest="50"
+                VerticalOptions="End"
+                Clicked="Button_Clicked"
+                HorizontalOptions="End"
+                CornerRadius="50"
+                Margin="0, 0, 10, 10"/>
+    </Grid>
+    
+</ContentPage>

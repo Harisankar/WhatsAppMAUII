@@ -1,0 +1,177 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0-maccatalyst;net7.0-android</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		 
+		<OutputType>Exe</OutputType>
+		<RootNamespace>WhatsAppMAUI</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Display name -->
+		<ApplicationTitle>SCHAT</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.whatsappmaui</ApplicationId>
+		<ApplicationIdGuid>F42E0A22-8C16-4492-BEC7-14025EA55F54</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
+	  <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+	  <AndroidKeyStore>False</AndroidKeyStore>
+	  <ApplicationId>com.companyname.whatsappmaui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
+	  <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+	  <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+	  <RunAOTCompilation>False</RunAOTCompilation>
+	  <AndroidKeyStore>False</AndroidKeyStore>
+	  <ApplicationId>com.companyname.whatsappmaui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
+	  <ApplicationId>com.companyname.whatsappmaui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
+	  <ApplicationId>com.companyname.whatsappmaui</ApplicationId>
+	</PropertyGroup>
+
+	
+	
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <ApplicationId>com.companyname.whatsappmaui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
+	  <ApplicationId>com.companyname.whatsappmaui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.22621.0|AnyCPU'">
+	  <ApplicationId>com.companyname.whatsappmaui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.22621.0|AnyCPU'">
+	  <ApplicationId>com.companyname.whatsappmaui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup>
+	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.22621.0</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#30a130" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#b6ccab" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Pages\Camerapage.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Remove="Pages\Camerapage.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\alice.jpg" />
+	  <None Remove="Resources\Images\avatar.svg" />
+	  <None Remove="Resources\Images\avatar_group.svg" />
+	  <None Remove="Resources\Images\bubble.png" />
+	  <None Remove="Resources\Images\call.png" />
+	  <None Remove="Resources\Images\camera.png" />
+	  <None Remove="Resources\Images\centia.jpg" />
+	  <None Remove="Resources\Images\chat.png" />
+	  <None Remove="Resources\Images\diane.jpg" />
+	  <None Remove="Resources\Images\dotnet.jpg" />
+	  <None Remove="Resources\Images\firstmacappva.jpg" />
+	  <None Remove="Resources\Images\flora.jpg" />
+	  <None Remove="Resources\Images\grace.jpg" />
+	  <None Remove="Resources\Images\hawei.jpg" />
+	  <None Remove="Resources\Images\hmo.jpg" />
+	  <None Remove="Resources\Images\infinix.jpg" />
+	  <None Remove="Resources\Images\info.png" />
+	  <None Remove="Resources\Images\jacques.jpg" />
+	  <None Remove="Resources\Images\jone.jpg" />
+	  <None Remove="Resources\Images\like.png" />
+	  <None Remove="Resources\Images\macBookpro.png" />
+	  <None Remove="Resources\Images\menu.png" />
+	  <None Remove="Resources\Images\missecall.png" />
+	  <None Remove="Resources\Images\more.png" />
+	  <None Remove="Resources\Images\nasa.jpg" />
+	  <None Remove="Resources\Images\natalie.jpg" />
+	  <None Remove="Resources\Images\outcall.png" />
+	  <None Remove="Resources\Images\pcamera.png" />
+	  <None Remove="Resources\Images\pick.png" />
+	  <None Remove="Resources\Images\pin.png" />
+	  <None Remove="Resources\Images\pins.png" />
+	  <None Remove="Resources\Images\play.png" />
+	  <None Remove="Resources\Images\pmenu.png" />
+	  <None Remove="Resources\Images\psearch.png" />
+	  <None Remove="Resources\Images\raspberryCar.jpg" />
+	  <None Remove="Resources\Images\riana.jpg" />
+	  <None Remove="Resources\Images\rita.jpg" />
+	  <None Remove="Resources\Images\rosa.jpg" />
+	  <None Remove="Resources\Images\sandrine.jpg" />
+	  <None Remove="Resources\Images\sans.png" />
+	  <None Remove="Resources\Images\sara.jpg" />
+	  <None Remove="Resources\Images\search.png" />
+	  <None Remove="Resources\Images\sms.png" />
+	  <None Remove="Resources\Images\tick.png" />
+	  <None Remove="Resources\Images\valerie.jpg" />
+	  <None Remove="Resources\Images\videocall.png" />
+	  <None Remove="Resources\Images\voicecall.png" />
+	  <None Remove="Resources\Images\whasappbkg.png" />
+	  <None Remove="Resources\Images\windows.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Maui" Version="1.3.0" />
+	  <PackageReference Include="CommunityToolkit.Maui.Markup" Version="1.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="MainTabbedPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\CallsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ChatsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\StatusPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Popups\ProfilePopup.xaml">
+	    <Generator></Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+</Project>
